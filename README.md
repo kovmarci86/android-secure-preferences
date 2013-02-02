@@ -11,11 +11,11 @@ Gives an implementation of SharedPreferences, which encrypts given values with A
 
 Environment setup
 -----------------
-install maven
-install Android sdk
-install sdk deployer ( https://github.com/mosabua/maven-android-sdk-deployer )
-check out source to a directory.
+ - install maven
+ - install Android sdk
+ - install sdk deployer ( https://github.com/mosabua/maven-android-sdk-deployer )
+ - check out source to a directory.
 
 Build
 -----
-mvn clean install
+ - mvn clean install
