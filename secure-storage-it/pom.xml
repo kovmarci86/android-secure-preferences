@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.mkovacs.android.secure</groupId>
 		<artifactId>secure-storage-parent</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>secure-storage-it</artifactId>

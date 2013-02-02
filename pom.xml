@@ -4,7 +4,7 @@
 
 	<groupId>com.mkovacs.android.secure</groupId>
 	<artifactId>secure-storage-parent</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>secure-storage - Parent</name>
 
@@ -39,7 +39,7 @@
 			<dependency>
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-storage-sample-app</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.1-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -47,14 +47,14 @@
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-storage-sample-app</artifactId>
 				<type>apk</type>
-				<version>0.0.1</version>
+				<version>0.0.1-SNAPSHOT</version>
 				<classifier>${zipaligned-classifier}</classifier> <!-- classifier set according to the ran profile -->
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-preferences</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.android</groupId>
