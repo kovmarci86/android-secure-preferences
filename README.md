@@ -23,3 +23,9 @@ Build
 Android compatibility
 ---------------------
 Project requires API level 8 due to Base64 Android API level requirements.
+
+Binary
+------
+Until GitHub deprecates download section, use:
+
+https://github.com/kovmarci86/android-secure-preferences/downloads
