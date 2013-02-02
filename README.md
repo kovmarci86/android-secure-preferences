@@ -19,3 +19,7 @@ Environment setup
 Build
 -----
  - mvn clean install
+
+Android compatibility
+---------------------
+Project requires API level 8 due to Base64 Android API level requirements.
