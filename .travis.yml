@@ -9,8 +9,8 @@ before_install:
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   # only update the sdk for the tools and platform-tools (1,2) and whatever api level
   # you are building for android (run "android list sdk" to get the full list.  14 = 2.2 or API level 8
-  - ls ${ANDROID_HOME}/platform-tools
   - android list sdk -a
   - android update sdk --filter 1,2,14 --no-ui --force
+  - ls ${ANDROID_HOME}/platform-tools
   
 script: maven clean install -Dandroid.test.skip=true
