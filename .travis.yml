@@ -11,4 +11,4 @@ before_install:
   - android update sdk --filter 1,2,11 --no-ui --force
   - ls ${ANDROID_HOME}/platform-tools
   
-install: mvn clean install -Dandroid.test.skip=true
+install: mvn clean install -Dandroid.test.skip=true -X
