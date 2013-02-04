@@ -19,6 +19,9 @@
 			<roles>
 				<role>Developer</role>
 			</roles>
+			<properties>
+				<javadocAuthor>NoTiCe</javadocAuthor>
+			</properties>
 		</developer>
 	</developers>
 
@@ -62,7 +65,7 @@
 			<dependency>
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-storage-sample-app</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.2-SNAPSHOT</version>
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
@@ -70,14 +73,14 @@
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-storage-sample-app</artifactId>
 				<type>apk</type>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.2-SNAPSHOT</version>
 				<classifier>${zipaligned-classifier}</classifier> <!-- classifier set according to the ran profile -->
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.mkovacs.android.secure</groupId>
 				<artifactId>secure-preferences</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.0.2-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.android</groupId>
