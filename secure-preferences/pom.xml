@@ -1,13 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.mkovacs.android.secure</groupId>
 		<artifactId>secure-storage-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>secure-preferences</artifactId>
-	<name>AES Encrypted SharedPreferences</name>
+	<name>SecureSharedPreferences</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
@@ -47,4 +46,7 @@
 			</plugin>
 		</plugins>
 	</build>
+	<description>AES Encrypted SharedPreferences for Android applications.
+Requires API Level 8 - Froyo
+</description>
 </project>

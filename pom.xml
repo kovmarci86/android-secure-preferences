@@ -4,7 +4,6 @@
 
 	<groupId>com.mkovacs.android.secure</groupId>
 	<artifactId>secure-storage-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>secure-storage - Parent</name>
 
@@ -17,14 +16,24 @@
 	<developers>
 		<developer>
 			<name>Marcell Kovacs (kovmarci86)</name>
+			<roles>
+				<role>Developer</role>
+			</roles>
 		</developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com/kovmarci86/android-secure-preferences.git</connection>
-		<developerConnection>scm:git:git@github.com/kovmarci86/android-secure-preferences.git</developerConnection>
-		<url>scm:git:git@github.com/kovmarci86/android-secure-preferences.git</url>
+		<connection>scm:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</connection>
+		<developerConnection>scm:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</developerConnection>
+		<url>git:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</url>
 	</scm>
+	<distributionManagement>
+		<site>
+			<id>starhost-andsecureprefs</id>
+			<url>ftp://starhost.hu/web/andsecureprefs/</url>
+		</site>
+
+	</distributionManagement>
 
 	<properties>
 		<platform.version>2.2.1</platform.version>
@@ -33,6 +42,20 @@
 		<repositoryName>android-secure-preferences</repositoryName>
 		<repositoryOwner>kovmarci86</repositoryOwner>
 	</properties>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<show>public</show>
+					<doctitle>ApiDocs</doctitle>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencyManagement>
 		<dependencies>
@@ -168,6 +191,46 @@
 						<proguardVersion>4.4</proguardVersion>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.2</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ssh</artifactId>
+							<version>2.3</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-ftp</artifactId>
+							<version>1.0-beta-6</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<reportPlugins>
+							<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>emma-maven-plugin</artifactId>
+								<version>1.0-alpha-3</version>
+							</plugin>
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-checkstyle-plugin</artifactId>
+								<version>2.9.1</version>
+							</plugin>
+							<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-project-info-reports-plugin</artifactId>
+								<version>2.6</version>
+								<configuration>
+									<dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+									<dependencyLocationsEnabled>true</dependencyLocationsEnabled>
+								</configuration>
+							</plugin>
+						</reportPlugins>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -293,4 +356,6 @@
 		</profile>
 	</profiles>
 
+	<url>http://starhost.hu/andsecureprefs/</url>
+	<version>0.0.2-SNAPSHOT</version>
 </project>

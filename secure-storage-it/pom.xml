@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>com.mkovacs.android.secure</groupId>
 		<artifactId>secure-storage-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>secure-storage-it</artifactId>
 	<packaging>apk</packaging>
-	<name>secure-storage-it - Integration tests</name>
+	<name>Integration tests</name>
 
 	<properties>
 		<!-- When not running a release, we are deploying the plain artifact (so 
@@ -20,20 +20,22 @@
 
 	<dependencies>
 		<dependency>
+			<artifactId>secure-preferences</artifactId>
+			<groupId>com.mkovacs.android.secure</groupId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.google.android</groupId>
 			<artifactId>android-test</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.mkovacs.android.secure</groupId>
 			<artifactId>secure-storage-sample-app</artifactId>
 			<type>apk</type>
 			<classifier>${zipaligned-classifier}</classifier> <!-- classifier set according to the ran profile -->
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<artifactId>secure-preferences</artifactId>
-			<groupId>com.mkovacs.android.secure</groupId>
 		</dependency>
 		<dependency>
 			<groupId>com.mkovacs.android.secure</groupId>
@@ -94,4 +96,5 @@
 		</profile>
 	</profiles>
 
+	<description>Integration tests using sample application</description>
 </project>

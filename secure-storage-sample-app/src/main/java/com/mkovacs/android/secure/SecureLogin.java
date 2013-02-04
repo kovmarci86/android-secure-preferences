@@ -21,226 +21,245 @@ import com.mkovacs.android.secure.service.settings.UserDataServce;
  * well.
  */
 public class SecureLogin extends Activity {
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(SecureLogin.class);
+    private static final int MIN_PASSWORD_LENGTH = 4;
+    private static final int LOGIN_TASK_TIME = 2000;
 
-	public enum LoginResult {
-		SUCCES(1), FAILED(2), REGISTRED(3), ERROR(4);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecureLogin.class);
 
-		private int value;
+    /**
+     * Login result types.
+     * @author NoTiCe
+     *
+     */
+    public enum LoginResult {
+        /**
+         * Successful.
+         */
+        SUCCES(1),
+        /**
+         * Failed.
+         */
+        FAILED(2),
+        /**
+         * Just registered.
+         */
+        REGISTRED(3),
+        /**
+         * Error with login.
+         */
+        ERROR(4);
 
-		private LoginResult(int value) {
-			this.value = value;
-		}
+        private int value;
 
-		public int getValue() {
-			return value;
-		}
-	}
+        /**
+         * Initializes with the enum value.
+         * @param value The value of the enum.
+         */
+        private LoginResult(int value) {
+            this.value = value;
+        }
 
-	/**
-	 * The default email to populate the email field with.
-	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
+        public int getValue() {
+            return value;
+        }
+    }
 
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
-	private UserLoginTask mAuthTask = null;
+    /**
+     * The default email to populate the email field with.
+     */
+    public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
 
-	// Values for email and password at the time of the login attempt.
-	private String mEmail;
-	private String mPassword;
+    /**
+     * Keep track of the login task to ensure we can cancel it if requested.
+     */
+    private UserLoginTask mAuthTask = null;
 
-	// UI references.
-	private EditText mEmailView;
-	private EditText mPasswordView;
-	// private View mLoginFormView;
-	// private View mLoginStatusView;
-	private TextView mLoginStatusMessageView;
+    // Values for email and password at the time of the login attempt.
+    private String mEmail;
+    private String mPassword;
 
-	// Added code.
-	private UserDataServce dataServce;
+    // UI references.
+    private EditText mEmailView;
+    private EditText mPasswordView;
+    // private View mLoginFormView;
+    // private View mLoginStatusView;
+    private TextView mLoginStatusMessageView;
 
-	private Toast toast;
+    // Added code.
+    private UserDataServce dataServce;
 
-	// Added code end.
+    private Toast toast;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// Added code.
-		try {
-			dataServce = new UserDataServce(getApplicationContext());
-		} catch (Exception e) {
-			finish();
-			LOGGER.error("Can not initialize secured shared prefs", e);
-			return;
-		}
-		// Added code end.
+    // Added code end.
 
-		setContentView(R.layout.activity_secure_login);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Added code.
+        try {
+            dataServce = new UserDataServce(getApplicationContext());
+        } catch (Exception e) {
+            finish();
+            LOGGER.error("Can not initialize secured shared prefs", e);
+            return;
+        }
+        // Added code end.
 
-		// Set up the login form.
-		mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
-		mEmailView = (EditText) findViewById(R.id.email);
-		mEmailView.setText(mEmail);
+        setContentView(R.layout.activity_secure_login);
 
-		mPasswordView = (EditText) findViewById(R.id.password);
-		mPasswordView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					public boolean onEditorAction(TextView textView, int id,
-							KeyEvent keyEvent) {
-						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
-							return true;
-						}
-						return false;
-					}
-				});
+        // Set up the login form.
+        mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
+        mEmailView = (EditText) findViewById(R.id.email);
+        mEmailView.setText(mEmail);
 
-		// mLoginFormView = findViewById(R.id.login_form);
-		// mLoginStatusView = findViewById(R.id.login_status);
-		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                    attemptLogin();
+                    return true;
+                }
+                return false;
+            }
+        });
 
-		findViewById(R.id.sign_in_button).setOnClickListener(
-				new View.OnClickListener() {
-					public void onClick(View view) {
-						attemptLogin();
-					}
-				});
-	}
+        // mLoginFormView = findViewById(R.id.login_form);
+        // mLoginStatusView = findViewById(R.id.login_status);
+        mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
 
-	/**
-	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
-	 */
-	public void attemptLogin() {
-		if (mAuthTask != null) {
-			return;
-		}
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
+    }
 
-		// Reset errors.
-		mEmailView.setError(null);
-		mPasswordView.setError(null);
+    /**
+     * Attempts to sign in or register the account specified by the login form.
+     * If there are form errors (invalid email, missing fields, etc.), the
+     * errors are presented and no actual login attempt is made.
+     */
+    public void attemptLogin() {
+        if (mAuthTask != null) {
+            return;
+        }
 
-		// Store values at the time of the login attempt.
-		mEmail = mEmailView.getText().toString();
-		mPassword = mPasswordView.getText().toString();
+        // Reset errors.
+        mEmailView.setError(null);
+        mPasswordView.setError(null);
 
-		boolean cancel = false;
-		View focusView = null;
+        // Store values at the time of the login attempt.
+        mEmail = mEmailView.getText().toString();
+        mPassword = mPasswordView.getText().toString();
 
-		// Check for a valid password.
-		if (TextUtils.isEmpty(mPassword)) {
-			mPasswordView.setError(getString(R.string.error_field_required));
-			focusView = mPasswordView;
-			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
-		}
+        boolean cancel = false;
+        View focusView = null;
 
-		// Check for a valid email address.
-		if (TextUtils.isEmpty(mEmail)) {
-			mEmailView.setError(getString(R.string.error_field_required));
-			focusView = mEmailView;
-			cancel = true;
-		} else if (!mEmail.contains("@")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
-			cancel = true;
-		}
+        // Check for a valid password.
+        if (TextUtils.isEmpty(mPassword)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (mPassword.length() < MIN_PASSWORD_LENGTH) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
 
-		if (cancel) {
-			// There was an error; don't attempt login and focus the first
-			// form field with an error.
-			focusView.requestFocus();
-		} else {
-			// Show a progress spinner, and kick off a background task to
-			// perform the user login attempt.
-			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-			showProgress(true);
-			mAuthTask = new UserLoginTask();
-			mAuthTask.execute((Void) null);
-		}
-	}
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(mEmail)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!mEmail.contains("@")) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
+        }
 
-	private void showProgress(boolean b) {
-		if (toast == null) {
-			toast = Toast.makeText(getApplicationContext(), "Progress",
-					Toast.LENGTH_SHORT);
-		}
-		if (b) {
-			toast.show();
-		} else {
-			toast.cancel();
-		}
-	}
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+            showProgress(true);
+            mAuthTask = new UserLoginTask();
+            mAuthTask.execute((Void) null);
+        }
+    }
 
-	/**
-	 * Represents an asynchronous login/registration task used to authenticate
-	 * the user.
-	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, LoginResult> {
-		@Override
-		protected LoginResult doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
+    private void showProgress(boolean b) {
+        if (toast == null) {
+            toast = Toast.makeText(getApplicationContext(), "Progress", Toast.LENGTH_SHORT);
+        }
+        if (b) {
+            toast.show();
+        } else {
+            toast.cancel();
+        }
+    }
 
-			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return LoginResult.ERROR;
-			}
+    /**
+     * Represents an asynchronous login/registration task used to authenticate
+     * the user.
+     */
+    public class UserLoginTask extends AsyncTask<Void, Void, LoginResult> {
 
-			String username = dataServce.getUsername();
-			String password = dataServce.getPassword();
+        @Override
+        protected LoginResult doInBackground(Void... params) {
+            // simulating an attempt authentication against a network service.
+            try {
+                // Simulate network access.
+                Thread.sleep(LOGIN_TASK_TIME);
+            } catch (InterruptedException e) {
+                return LoginResult.ERROR;
+            }
 
-			LoginResult result;
-			if (username != null && password != null) {
-				if (username.equals(mEmail) && password.equals(mPassword)) {
-					result = LoginResult.SUCCES;
-				} else {
-					result = LoginResult.FAILED;
-				}
-			} else {
-				dataServce.setUsername(mEmail);
-				dataServce.setPassword(mPassword);
-				result = LoginResult.REGISTRED;
-			}
+            String username = dataServce.getUsername();
+            String password = dataServce.getPassword();
 
-			return result;
-		}
+            LoginResult result;
+            if (username != null && password != null) {
+                if (username.equals(mEmail) && password.equals(mPassword)) {
+                    result = LoginResult.SUCCES;
+                } else {
+                    result = LoginResult.FAILED;
+                }
+            } else {
+                dataServce.setUsername(mEmail);
+                dataServce.setPassword(mPassword);
+                result = LoginResult.REGISTRED;
+            }
 
-		@Override
-		protected void onPostExecute(final LoginResult success) {
-			mAuthTask = null;
-			showProgress(false);
+            return result;
+        }
 
-			if (LoginResult.SUCCES.equals(success)) {
-				finish();
-			} else if (LoginResult.FAILED.equals(success)) {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
-			} else if (LoginResult.REGISTRED.equals(success)) {
-				Toast.makeText(getApplicationContext(), "Registred",
-						Toast.LENGTH_SHORT).show();
-				finish();
-			} else if (LoginResult.ERROR.equals(success)) {
-				Toast.makeText(getApplicationContext(), "Error",
-						Toast.LENGTH_SHORT).show();
-				finish();
-			}
-		}
+        @Override
+        protected void onPostExecute(final LoginResult success) {
+            mAuthTask = null;
+            showProgress(false);
 
-		@Override
-		protected void onCancelled() {
-			mAuthTask = null;
-			showProgress(false);
-		}
-	}
+            if (LoginResult.SUCCES.equals(success)) {
+                finish();
+            } else if (LoginResult.FAILED.equals(success)) {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            } else if (LoginResult.REGISTRED.equals(success)) {
+                Toast.makeText(getApplicationContext(), "Registred", Toast.LENGTH_SHORT).show();
+                finish();
+            } else if (LoginResult.ERROR.equals(success)) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            showProgress(false);
+        }
+    }
 }
