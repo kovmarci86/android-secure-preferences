@@ -8,14 +8,11 @@ before_install:
   - export ANDROID_HOME=`pwd`/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
   - android list sdk -a
-  - android update sdk --filter 1,2,11,12,13,14 --no-ui --force
+  - android update sdk --filter 1,2,12 --no-ui --force
 #  - ls ${ANDROID_HOME}/platform-tools
 #  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/secure-storage-sample-app
 #  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/
 #  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platforms/
 #  - chmod 777 /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/*
 #  - /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/aapt
-install: 
-  - echo "Building core"
-  - cd secure-preferences
-  - mvn test
+install: mvn test
