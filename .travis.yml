@@ -15,4 +15,7 @@ before_install:
 #  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platforms/
 #  - chmod 777 /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/*
 #  - /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/aapt
-install: mvn test
+install:
+  - echo "Building core"
+  - cd secure-preferences
+  - mvn test
