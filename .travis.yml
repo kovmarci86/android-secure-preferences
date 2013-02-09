@@ -13,6 +13,7 @@ before_install:
   - ls -l /home/travis/build/kovmarci86/android-secure-preferences/secure-storage-sample-app
   - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/
   - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platforms/
+  - chmod 777 /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/*
   - /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/aapt
   
 install: mvn clean install -Dandroid.test.skip=true -X
