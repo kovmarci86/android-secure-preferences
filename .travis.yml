@@ -11,7 +11,7 @@ before_install:
   - android update sdk --filter 1,2,11 --no-ui --force
   - ls ${ANDROID_HOME}/platform-tools
   - ls -l /home/travis/build/kovmarci86/android-secure-preferences/secure-storage-sample-app
-  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/aapt
-  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platforms/android-8/
+  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platform-tools/
+  - ls -l /home/travis/build/kovmarci86/android-secure-preferences/android-sdk-linux/platforms/
   
 install: mvn clean install -Dandroid.test.skip=true -X
