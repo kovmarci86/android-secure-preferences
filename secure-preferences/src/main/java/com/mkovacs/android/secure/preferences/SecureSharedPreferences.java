@@ -41,7 +41,7 @@ public class SecureSharedPreferences implements SharedPreferences {
     }
 
     @Override
-    public Editor edit() {
+    public SecuredEditor edit() {
         return new SecuredEditor(helper, prefs.edit());
     }
 

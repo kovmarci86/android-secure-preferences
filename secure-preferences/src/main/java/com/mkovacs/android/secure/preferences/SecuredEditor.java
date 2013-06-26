@@ -34,50 +34,50 @@ public class SecuredEditor implements Editor {
     }
 
     @Override
-    public Editor putString(String key, String value) {
+    public SecuredEditor putString(String key, String value) {
         editor.putString(key, helper.encode(value));
         return this;
     }
 
 	@Override
-	public Editor putStringSet(String key, Set<String> values) {
+	public SecuredEditor putStringSet(String key, Set<String> values) {
 		String value = TextUtils.join(SET_DELIMITER, values);
 		editor.putString(key, helper.encode(value));
         return this;
 	}
 
 	@Override
-    public Editor putInt(String key, int value) {
+    public SecuredEditor putInt(String key, int value) {
         editor.putString(key, helper.encode(value));
         return this;
     }
 
     @Override
-    public Editor putLong(String key, long value) {
+    public SecuredEditor putLong(String key, long value) {
         editor.putString(key, helper.encode(value));
         return this;
     }
 
     @Override
-    public Editor putFloat(String key, float value) {
+    public SecuredEditor putFloat(String key, float value) {
         editor.putString(key, helper.encode(value));
         return this;
     }
 
     @Override
-    public Editor putBoolean(String key, boolean value) {
+    public SecuredEditor putBoolean(String key, boolean value) {
         editor.putString(key, helper.encode(value));
         return this;
     }
 
     @Override
-    public Editor remove(String key) {
+    public SecuredEditor remove(String key) {
         editor.remove(key);
         return this;
     }
 
     @Override
-    public Editor clear() {
+    public SecuredEditor clear() {
         editor.clear();
         return this;
     }

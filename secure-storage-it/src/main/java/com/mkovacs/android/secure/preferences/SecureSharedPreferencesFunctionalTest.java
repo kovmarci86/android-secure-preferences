@@ -63,7 +63,7 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
      */
     public void testSecureSharedPreferencesWorks() throws Exception {
         // Put values in it
-        Editor edit = sut.edit();
+        SecuredEditor edit = sut.edit();
         edit.putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE);
         edit.putFloat(FLOAT_KEY, FLOAT_VALUE);
         edit.putInt(INT_KEY, INT_VALUE);
