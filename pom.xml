@@ -30,22 +30,12 @@
 		<developerConnection>scm:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</developerConnection>
 		<url>git:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</url>
 	</scm>
-	<distributionManagement>
-	<repository>
-		<id>nexus</id>
-		<name>Inmite 3rd party Repo</name>
-		<url>http://mvn.office.inmite.eu/nexus/content/repositories/thirdparty</url>
-		<layout>default</layout>
-		<uniqueVersion>false</uniqueVersion>
-	</repository>
-	<snapshotRepository>
-		<id>nexus</id>
-		<name>Inmite 3rd party Snapshot Repo</name>
-		<url>http://mvn.office.inmite.eu/nexus/content/repositories/thirdparty-snapshots</url>
-		<layout>default</layout>
-		<uniqueVersion>false</uniqueVersion>
-	</snapshotRepository>
 
+	<distributionManagement>
+		<site>
+			<id>starhost-andsecureprefs</id>
+			<url>ftp://starhost.hu/web/andsecureprefs/</url>
+		</site>
 	</distributionManagement>
 
 	<properties>
