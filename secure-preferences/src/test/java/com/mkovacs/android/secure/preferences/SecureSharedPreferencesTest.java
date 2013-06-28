@@ -1,22 +1,23 @@
 package com.mkovacs.android.secure.preferences;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 
-import java.util.Map;
+import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
 
 import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
+import java.util.Map;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import edu.gmu.tec.scout.utilities.Encryption;
+
+import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * JUnit test for {@link SecureSharedPreferences}.
@@ -62,7 +63,7 @@ public class SecureSharedPreferencesTest extends EasyMockSupport {
     @Test
     public void testEdit() {
         // GIVEN
-        Editor fooEditor = createMock(Editor.class);
+        Editor fooEditor = createMock(SecuredEditor.class);
         // EXPECT
         expect(preferences.edit()).andReturn(fooEditor);
         replayAll();
