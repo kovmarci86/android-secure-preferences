@@ -23,6 +23,15 @@
 				<javadocAuthor>NoTiCe</javadocAuthor>
 			</properties>
 		</developer>
+		<developer>
+			<name>Tomas Prochazka (tprochazka)</name>
+			<roles>
+				<role>Contributor</role>
+			</roles>
+			<properties>
+				<javadocAuthor>tprochazka</javadocAuthor>
+			</properties>
+		</developer>
 	</developers>
 
 	<scm>
