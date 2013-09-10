@@ -1,8 +1,11 @@
 package com.mkovacs.android.secure.preferences;
 
 import java.util.Map;
+import java.util.Set;
 
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.mkovacs.android.secure.preferences.encryption.EncryptionAlgorithm;
 import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
@@ -17,12 +20,13 @@ public class SecureSharedPreferences implements SharedPreferences {
     private EncryptionHelper helper;
 
     /**
-     * Initializes with a single {@link SharedPreferences} and the
-     * {@link Encryption} to use.
+     * Initializes with a single {@link SharedPreferences}
+     * and the {@link edu.gmu.tec.scout.utilities.Encryption} to use.
+     *
      * @param preferences
      *            The {@link SharedPreferences} to use.
      * @param encryption
-     *            The {@link Encryption} to use.
+     *            The {@link edu.gmu.tec.scout.utilities.Encryption} to use.
      */
     public SecureSharedPreferences(SharedPreferences preferences, EncryptionAlgorithm encryption) {
         this.prefs = preferences;
@@ -36,7 +40,7 @@ public class SecureSharedPreferences implements SharedPreferences {
     }
 
     @Override
-    public Editor edit() {
+    public SecuredEditor edit() {
         return new SecuredEditor(helper, prefs.edit());
     }
 
@@ -68,6 +72,12 @@ public class SecureSharedPreferences implements SharedPreferences {
     @Override
     public String getString(String key, String defValue) {
         return helper.readAndDecodeTemplate(prefs, key, defValue);
+    }
+
+    @TargetApi(value = Build.VERSION_CODES.HONEYCOMB)
+    @Override
+    public Set<String> getStringSet(String key, Set<String> defValues) {
+        return helper.readAndDecodeTemplate(prefs, key, defValues);
     }
 
     @Override
