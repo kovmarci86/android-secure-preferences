@@ -1,15 +1,14 @@
 package com.mkovacs.android.secure.preferences;
 
+import java.util.Map;
+import java.util.Set;
+
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
+import android.os.Build;
 
 import com.mkovacs.android.secure.preferences.encryption.EncryptionAlgorithm;
 import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
-
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 /**
  * Decorates SharedPreferences with AES Encryption.
@@ -75,18 +74,10 @@ public class SecureSharedPreferences implements SharedPreferences {
         return helper.readAndDecodeTemplate(prefs, key, defValue);
     }
 
+    @TargetApi(value = Build.VERSION_CODES.HONEYCOMB)
     @Override
     public Set<String> getStringSet(String key, Set<String> defValues) {
-        String value = helper.readAndDecodeTemplate(prefs, key, "");
-        if ("".equals(value)) {
-            return defValues;
-        }
-        String[] sets = TextUtils.split(value, Pattern.quote(SecuredEditor.SET_DELIMITER));
-        LinkedHashSet<String> set = new LinkedHashSet<String>(sets.length);
-        for (String s : sets) {
-            set.add(s);
-        }
-        return set;
+        return helper.readAndDecodeTemplate(prefs, key, defValues);
     }
 
     @Override

@@ -75,7 +75,7 @@ public class SecureSharedPreferencesTest extends EasyMockSupport {
         assertEquals("Editor must be SecuredEditor.", SecuredEditor.class, edit.getClass());
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Test
     public void testGetAll() {
         // GIVEN

@@ -1,12 +1,11 @@
 package com.mkovacs.android.secure.preferences;
 
+import java.util.Set;
+
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
-import android.text.TextUtils;
 
 import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
-
-import java.util.Set;
 
 /**
  * An {@link Editor} decorator using AES encription.
@@ -14,9 +13,7 @@ import java.util.Set;
  * @author NoTiCe
  */
 public class SecuredEditor implements Editor {
-
     public static final String SET_DELIMITER = "|\u2006|";
-
     private Editor editor;
     private EncryptionHelper helper;
 
@@ -39,14 +36,13 @@ public class SecuredEditor implements Editor {
         return this;
     }
 
-	@Override
-	public SecuredEditor putStringSet(String key, Set<String> values) {
-		String value = TextUtils.join(SET_DELIMITER, values);
-		editor.putString(key, helper.encode(value));
+    @Override
+    public SecuredEditor putStringSet(String key, Set<String> values) {
+        editor.putString(key, helper.encode(values));
         return this;
-	}
+    }
 
-	@Override
+    @Override
     public SecuredEditor putInt(String key, int value) {
         editor.putString(key, helper.encode(value));
         return this;
@@ -87,16 +83,25 @@ public class SecuredEditor implements Editor {
         return editor.commit();
     }
 
-	/**
-	 * Smarter version of original {@link android.content.SharedPreferences.Editor#apply()}
-	 * method that simply call {@link android.content.SharedPreferences.Editor#commit()} for pre API 9 Androids.
-	 */
     @Override
     public void apply() {
+        editor.apply();
+    }
+
+    /**
+     * Compatibility version of original {@link android.content.SharedPreferences.Editor#apply()}
+     * method that simply call {@link android.content.SharedPreferences.Editor#commit()} for pre API 9 Androids.
+     * This method is also thread safe on pre API 9.
+     * Note that when two editors are modifying preferences at the same time, the last one to call apply wins. (Android Doc)
+     */
+    public void save() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
             editor.apply();
         } else {
-            editor.commit();
+            synchronized (SecuredEditor.class) {
+                editor.commit();
+            }
         }
     }
+
 }
