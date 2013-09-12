@@ -2,6 +2,7 @@ package com.mkovacs.android.secure.preferences;
 
 import java.util.Set;
 
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
 
@@ -90,12 +91,20 @@ public class SecuredEditor implements Editor {
 
     /**
      * Compatibility version of original {@link android.content.SharedPreferences.Editor#apply()}
-     * method that simply call {@link android.content.SharedPreferences.Editor#commit()} for pre API 9 Androids.
-     * This method is also thread safe on pre API 9.
+     * method that simply call {@link android.content.SharedPreferences.Editor#commit()} for pre Android Honeycomb (API 11).
+     * This method is thread safe also on pre API 11.
      * Note that when two editors are modifying preferences at the same time, the last one to call apply wins. (Android Doc)
      */
     public void save() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+        compatilitySave(this);
+    }
+
+    /**
+     * Saves the {@link SharedPreferences}. See save method.
+     * @param editor The editor to save/commit.
+     */
+    public static void compatilitySave(Editor editor) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             editor.apply();
         } else {
             synchronized (SecuredEditor.class) {
