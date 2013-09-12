@@ -18,6 +18,7 @@ import com.mkovacs.android.secure.service.settings.UserDataServce;
  * @author NoTiCe
  */
 public class MainActivity extends Activity {
+    private static final String INITIALIZATION_ERROR = "Can not initialize secured shared prefs";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
     private Button loginButton;
     private UserDataServce dataServce;
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
             dataServce = new UserDataServce(getApplicationContext());
         } catch (Exception e) {
             finish();
-            LOGGER.error("Can not initialize secured shared prefs", e);
+            LOGGER.error(INITIALIZATION_ERROR, e);
             return;
         }
         setContentView(R.layout.activity_main);

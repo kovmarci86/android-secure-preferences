@@ -89,14 +89,8 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
      */
     public void testSecureSharedPreferencesFluentAPIWorks() throws Exception {
         // Put values in it
-        sut.edit()
-            .putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE)
-            .putFloat(FLOAT_KEY, FLOAT_VALUE)
-            .putInt(INT_KEY, INT_VALUE)
-            .putLong(LONG_KEY, LONG_VALUE)
-            .putString(STRING_KEY, STRING_VALUE)
-            .putStringSet(STRING_SET_KEY, STRING_SET_VALUE)
-            .commit();
+        sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE).putLong(LONG_KEY, LONG_VALUE)
+                .putString(STRING_KEY, STRING_VALUE).putStringSet(STRING_SET_KEY, STRING_SET_VALUE).commit();
 
         // read back the values with new instance of SharedPreferences
         setUp();
@@ -115,14 +109,8 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
      */
     public void testSecureSharedPreferencesApply() throws Exception {
         // Put values in it
-        sut.edit()
-                .putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE)
-                .putFloat(FLOAT_KEY, FLOAT_VALUE)
-                .putInt(INT_KEY, INT_VALUE)
-                .putLong(LONG_KEY, LONG_VALUE)
-                .putString(STRING_KEY, STRING_VALUE)
-                .putStringSet(STRING_SET_KEY, STRING_SET_VALUE)
-                .apply();
+        sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE).putLong(LONG_KEY, LONG_VALUE)
+                .putString(STRING_KEY, STRING_VALUE).putStringSet(STRING_SET_KEY, STRING_SET_VALUE).apply();
 
         // read back the values with new instance of SharedPreferences
         assertEquals(WRONG_VALUE_MESSAGE, BOOLEAN_VALUE, sut.getBoolean(BOOLEAN_KEY, false));

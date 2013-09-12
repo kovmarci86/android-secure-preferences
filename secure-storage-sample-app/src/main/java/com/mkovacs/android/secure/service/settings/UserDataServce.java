@@ -1,11 +1,11 @@
 package com.mkovacs.android.secure.service.settings;
 
-import com.mkovacs.android.secure.preferences.SecureSharedPreferences;
-
-import edu.gmu.tec.scout.utilities.Encryption;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.mkovacs.android.secure.preferences.SecureFactory;
+import com.mkovacs.android.secure.preferences.SecureSharedPreferences;
 
 /**
  * A sample Data Access Object, which is using {@link SecureSharedPreferences}.
@@ -25,7 +25,8 @@ public class UserDataServce {
      * @throws Exception If the initialization fails.
      */
     public UserDataServce(Context context) throws Exception {
-        prefs = new SecureSharedPreferences(context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE), new Encryption(PASS));
+        // prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        prefs = SecureFactory.getPreferences(context, PREFS_NAME, PASS);
     }
 
     /**

@@ -10,7 +10,10 @@ import org.easymock.EasyMockSupport;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import edu.gmu.tec.scout.utilities.Encryption;
 
@@ -175,6 +178,24 @@ public class SecureSharedPreferencesTest extends EasyMockSupport {
         // WHEN
         sut.setHelper(helper);
         String result = sut.getString(fooKey, defValue);
+        // THEN
+        verifyAll();
+        assertEquals("Wrong result", fooResult, result);
+    }
+
+    @Test
+    public void testGetStringSet() {
+        // GIVEN
+        EncryptionHelper helper = createMock(EncryptionHelper.class);
+        Set<String> defValue = new HashSet<String>();
+        Set<String> fooResult = new HashSet<String>(Arrays.asList(new String[]{"1f"}));
+        String fooKey = "fooKey";
+        // EXPECT
+        expect(helper.readAndDecodeTemplate(preferences, key, defValue)).andReturn(fooResult);
+        replayAll();
+        // WHEN
+        sut.setHelper(helper);
+        Set<String> result = sut.getStringSet(fooKey, defValue);
         // THEN
         verifyAll();
         assertEquals("Wrong result", fooResult, result);

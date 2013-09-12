@@ -14,7 +14,6 @@ import com.mkovacs.android.secure.preferences.encryption.EncryptionHelper;
  * @author NoTiCe
  */
 public class SecuredEditor implements Editor {
-    public static final String SET_DELIMITER = "|\u2006|";
     private Editor editor;
     private EncryptionHelper helper;
 
