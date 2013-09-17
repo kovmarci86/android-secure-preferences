@@ -11,8 +11,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.mkovacs.android.secure.preferences.encryption.EncryiptionException;
-import com.mkovacs.android.secure.preferences.encryption.EncryptionAlgorithm;
+import com.github.kovmarci86.android.secure.preferences.encryption.EncryiptionException;
+import com.github.kovmarci86.android.secure.preferences.encryption.EncryptionAlgorithm;
 
 /**
  * This class is from the following site:

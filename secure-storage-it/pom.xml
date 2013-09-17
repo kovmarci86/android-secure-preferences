@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.mkovacs.android.secure</groupId>
+		<groupId>com.github.kovmarci86.android.secure</groupId>
 		<artifactId>secure-storage-parent</artifactId>
 		<version>0.0.2-SNAPSHOT</version>
 	</parent>
@@ -21,7 +21,7 @@
 	<dependencies>
 		<dependency>
 			<artifactId>secure-preferences</artifactId>
-			<groupId>com.mkovacs.android.secure</groupId>
+			<groupId>com.github.kovmarci86.android.secure</groupId>
 		</dependency>
 
 		<dependency>
@@ -31,14 +31,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.mkovacs.android.secure</groupId>
+			<groupId>com.github.kovmarci86.android.secure</groupId>
 			<artifactId>secure-storage-sample-app</artifactId>
 			<type>apk</type>
 			<classifier>${zipaligned-classifier}</classifier> <!-- classifier set according to the ran profile -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.mkovacs.android.secure</groupId>
+			<groupId>com.github.kovmarci86.android.secure</groupId>
 			<artifactId>secure-storage-sample-app</artifactId>
 			<type>jar</type>
 			<scope>provided</scope>
