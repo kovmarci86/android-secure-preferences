@@ -10,16 +10,16 @@ public interface EncryptionAlgorithm {
      * @param bytes
      *            The bytes to encrypt.
      * @return The encrypted bytes.
-     * @throws EncryiptionException When the encryiption fails.
+     * @throws EncryptionException When the encryiption fails.
      */
-    byte[] encrypt(byte[] bytes) throws EncryiptionException;
+    byte[] encrypt(byte[] bytes) throws EncryptionException;
 
     /**
      * Decrypts the given bytes.
      * @param bytes
      *            The bytes to decrypt.
      * @return The decrypted bytes.
-     * @throws EncryiptionException When the encryiption fails.
+     * @throws EncryptionException When the encryiption fails.
      */
-    byte[] decrypt(byte[] bytes) throws EncryiptionException;
+    byte[] decrypt(byte[] bytes) throws EncryptionException;
 }

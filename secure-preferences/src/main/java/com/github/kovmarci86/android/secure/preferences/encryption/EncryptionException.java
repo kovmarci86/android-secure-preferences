@@ -5,12 +5,12 @@ package com.github.kovmarci86.android.secure.preferences.encryption;
  * @author NoTiCe
  *
  */
-public class EncryiptionException extends Exception {
+public class EncryptionException extends Exception {
 
     /**
      * Inherited from {@link Exception}.
      */
-    public EncryiptionException() {
+    public EncryptionException() {
         super();
     }
 
@@ -19,7 +19,7 @@ public class EncryiptionException extends Exception {
      * @param message The message.
      * @param cause The root cause.
      */
-    public EncryiptionException(String message, Throwable cause) {
+    public EncryptionException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -27,7 +27,7 @@ public class EncryiptionException extends Exception {
      * Inherited from {@link Exception}.
      * @param message The message.
      */
-    public EncryiptionException(String message) {
+    public EncryptionException(String message) {
         super(message);
     }
 
@@ -35,7 +35,7 @@ public class EncryiptionException extends Exception {
      * Inherited from {@link Exception}.
      * @param cause The root cause.
      */
-    public EncryiptionException(Throwable cause) {
+    public EncryptionException(Throwable cause) {
         super(cause);
     }
 

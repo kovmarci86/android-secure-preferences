@@ -11,8 +11,8 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.github.kovmarci86.android.secure.preferences.encryption.EncryiptionException;
 import com.github.kovmarci86.android.secure.preferences.encryption.EncryptionAlgorithm;
+import com.github.kovmarci86.android.secure.preferences.encryption.EncryptionException;
 
 /**
  * This class is from the following site:
@@ -63,20 +63,20 @@ public class Encryption implements EncryptionAlgorithm {
      * Encrypts the bytes.
      * @param plaintext The bytes to encrypt.
      * @return The encrypted value.
-     * @throws EncryiptionException On encryption exception.
+     * @throws EncryptionException On encryption exception.
      */
     @Override
-    public byte[] encrypt(byte[] plaintext) throws EncryiptionException {
+    public byte[] encrypt(byte[] plaintext) throws EncryptionException {
         // returns byte array encrypted with key
         try {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
             return cipher.doFinal(plaintext);
         } catch (InvalidKeyException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         } catch (IllegalBlockSizeException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         } catch (BadPaddingException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         }
     }
 
@@ -84,20 +84,20 @@ public class Encryption implements EncryptionAlgorithm {
      * Decrypes the cypher.
      * @param ciphertext The data to decrypt.
      * @return The decrypted value.
-     * @throws EncryiptionException On ecryption exception.
+     * @throws EncryptionException On ecryption exception.
      */
     @Override
-    public byte[] decrypt(byte[] ciphertext) throws EncryiptionException {
+    public byte[] decrypt(byte[] ciphertext) throws EncryptionException {
         // returns byte array decrypted with key
         try {
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             return cipher.doFinal(ciphertext);
         } catch (InvalidKeyException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         } catch (IllegalBlockSizeException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         } catch (BadPaddingException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         }
     }
 

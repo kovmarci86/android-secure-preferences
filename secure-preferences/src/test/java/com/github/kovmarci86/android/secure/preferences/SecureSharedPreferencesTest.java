@@ -1,28 +1,26 @@
 package com.github.kovmarci86.android.secure.preferences;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-
-import com.github.kovmarci86.android.secure.preferences.SecureSharedPreferences;
-import com.github.kovmarci86.android.secure.preferences.SecuredEditor;
-import com.github.kovmarci86.android.secure.preferences.encryption.EncryptionHelper;
-
-import org.easymock.EasyMockSupport;
-import org.junit.Before;
-import org.junit.Test;
+import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import edu.gmu.tec.scout.utilities.Encryption;
+import org.easymock.EasyMockSupport;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+
+import com.github.kovmarci86.android.secure.preferences.encryption.EncryptionHelper;
+
+import edu.gmu.tec.scout.utilities.Encryption;
 
 /**
  * JUnit test for {@link SecureSharedPreferences}.

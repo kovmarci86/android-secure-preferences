@@ -56,6 +56,7 @@ public class EncryptionHelper {
 
     /**
      * Encodes a single value to string.
+     * May result null on an internal problem.
      * @param <T> The type of the value.
      * @param value The T type of value to encrypt.
      * @return The encrypted value as string.
@@ -72,7 +73,7 @@ public class EncryptionHelper {
                 result = Base64.encodeToString(encrypt, Base64.DEFAULT);
             } catch (IOException e) {
                 LOGGER.error("Error encoding value", e);
-            } catch (EncryiptionException e) {
+            } catch (EncryptionException e) {
                 LOGGER.error("Error encoding value", e);
             }
         }
@@ -85,7 +86,7 @@ public class EncryptionHelper {
         if (stringValue != null) {
             try {
                 result = createDecodedObjectStream(stringValue);
-            } catch (EncryiptionException e) {
+            } catch (EncryptionException e) {
                 LOGGER.error("Error reading from properties. Key: {}", key, e);
                 result = null;
             }
@@ -95,13 +96,13 @@ public class EncryptionHelper {
         return result;
     }
 
-    private ObjectInputStream createDecodedObjectStream(String stringValue) throws EncryiptionException {
+    private ObjectInputStream createDecodedObjectStream(String stringValue) throws EncryptionException {
         byte[] decodedBytes = Base64.decode(stringValue, Base64.DEFAULT);
         byte[] decoded = encryption.decrypt(decodedBytes);
         try {
             return new ObjectInputStream(new ByteArrayInputStream(decoded));
         } catch (IOException e) {
-            throw new EncryiptionException(e);
+            throw new EncryptionException(e);
         }
     }
 }
