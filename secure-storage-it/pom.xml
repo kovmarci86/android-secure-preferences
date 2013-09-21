@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.github.kovmarci86.android.secure</groupId>
 		<artifactId>secure-storage-parent</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>1.0.0</version>
 	</parent>
 
 	<artifactId>secure-storage-it</artifactId>
