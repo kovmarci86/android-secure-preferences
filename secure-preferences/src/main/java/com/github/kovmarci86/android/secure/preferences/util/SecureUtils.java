@@ -6,11 +6,10 @@ import java.util.Set;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.github.kovmarci86.android.secure.preferences.SecureFactory;
 import com.github.kovmarci86.android.secure.preferences.SecuredEditor;
 
 /**
- * Util classes for {@link SecureFactory}.
+ * Util classes for {@link com.github.kovmarci86.android.secure.preferencesSecureFactory}.
  * @author NoTiCe
  */
 public final class SecureUtils {
@@ -26,7 +25,7 @@ public final class SecureUtils {
      * Copies data from one {@link SharedPreferences} to another.
      * @param from The source.
      * @param to The target.
-     * @param version The version code to write into the preferences for future check. 
+     * @param version The version code to write into the preferences for future check.
      */
     @SuppressWarnings("unchecked")
     public static void migrateData(SharedPreferences from, SharedPreferences to, int version) {
@@ -58,7 +57,7 @@ public final class SecureUtils {
 
     /**
      * Gets the version of {@link SharedPreferences} if any.
-     * @param preferences
+     * @param preferences The preferences to get the version.
      * @return The version or -1.
      */
     public static int getVersion(SharedPreferences preferences) {

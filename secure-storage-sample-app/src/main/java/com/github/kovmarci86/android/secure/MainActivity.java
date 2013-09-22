@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.github.kovmarci86.android.secure.service.settings.UserDataServce;
-import com.github.kovmarci86.android.secure.R;
 
 /**
  * Main activity for the secure sample app.

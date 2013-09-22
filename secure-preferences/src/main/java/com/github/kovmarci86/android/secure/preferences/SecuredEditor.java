@@ -2,7 +2,6 @@ package com.github.kovmarci86.android.secure.preferences;
 
 import java.util.Set;
 
-import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Build;
 
@@ -99,7 +98,7 @@ public class SecuredEditor implements Editor {
     }
 
     /**
-     * Saves the {@link SharedPreferences}. See save method.
+     * Saves the {@link android.content.SharedPreferences}. See save method.
      * @param editor The editor to save/commit.
      */
     public static void compatilitySave(Editor editor) {

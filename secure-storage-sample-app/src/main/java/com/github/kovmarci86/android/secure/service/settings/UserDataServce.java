@@ -5,10 +5,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.github.kovmarci86.android.secure.preferences.SecureFactory;
-import com.github.kovmarci86.android.secure.preferences.SecureSharedPreferences;
 
 /**
- * A sample Data Access Object, which is using {@link SecureSharedPreferences}.
+ * A sample Data Access Object, which is using {@link com.github.kovmarci86.android.secure.preferences.SecureSharedPreferences}.
  * @author NoTiCe
  */
 public class UserDataServce {

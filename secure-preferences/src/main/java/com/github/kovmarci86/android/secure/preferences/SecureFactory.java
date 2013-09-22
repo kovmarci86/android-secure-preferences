@@ -22,7 +22,9 @@ import edu.gmu.tec.scout.utilities.Encryption;
  */
 public final class SecureFactory {
     private static final String INITIALIZATION_ERROR = "Can not initialize SecureSharedPreferences";
+    /** Version 1 identifier. */
     public static final int VERSION_1 = 1;
+    /** Latest version constant. Note: this may change with later versions */
     public static final int LATEST_VERSION = VERSION_1;
     private static final Logger LOGGER = LoggerFactory.getLogger(SecureFactory.class);
 
@@ -56,12 +58,12 @@ public final class SecureFactory {
     /**
      * Creates the {@link SecureSharedPreferences} instance with a given original and an {@link EncryptionAlgorithm}.
      * This function does a version check and the required migrations when the local structure is outdated or not encrypted yet.
+     * May throw SecurityException When the {@link EncryptionAlgorithm} can not be initialized.
      * @param original The original {@link SharedPreferences}, which can be also a {@link SecureSharedPreferences} instance.
      * @param password The password to use. This will use the {@link Encryption} implementation of the {@link EncryptionAlgorithm}.
      * @return A {@link SecureSharedPreferences} instance.
-     * @throws SecurityException When the {@link EncryptionAlgorithm} can not be initialized.
      */
-    public static SecureSharedPreferences getPreferences(SharedPreferences original, String password) throws SecurityException {
+    public static SecureSharedPreferences getPreferences(SharedPreferences original, String password) {
         try {
             EncryptionAlgorithm encryption = new Encryption(password);
             return getPreferences(original, encryption);

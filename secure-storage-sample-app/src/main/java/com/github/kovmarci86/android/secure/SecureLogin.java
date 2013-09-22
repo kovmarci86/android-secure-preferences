@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.kovmarci86.android.secure.service.settings.UserDataServce;
-import com.github.kovmarci86.android.secure.R;
 
 /**
  * Activity which displays a login screen to the user, offering registration as

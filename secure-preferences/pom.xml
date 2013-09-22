@@ -8,6 +8,9 @@
 	</parent>
 	<artifactId>secure-preferences</artifactId>
 	<name>SecureSharedPreferences</name>
+	<properties>
+		<checkstyle.directory>${basedir}/../code-quality</checkstyle.directory>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
@@ -46,6 +49,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<configLocation>${checkstyle.directory}/android_checks.xml</configLocation>
+					<propertyExpansion>samedir=${checkstyle.directory}</propertyExpansion>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<groupId>org.apache.maven.plugins</groupId>
 			</plugin>
@@ -60,6 +71,28 @@
 					<repositoryName>${repositoryName}</repositoryName>
 					<repositoryOwner>${repositoryOwner}</repositoryOwner>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<!-- explicitly define maven-deploy-plugin after other to force exec 
+					order -->
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>install</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
