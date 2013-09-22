@@ -9,7 +9,7 @@ import android.content.SharedPreferences.Editor;
 import com.github.kovmarci86.android.secure.preferences.SecuredEditor;
 
 /**
- * Util classes for {@link com.github.kovmarci86.android.secure.preferencesSecureFactory}.
+ * Util classes for {@link com.github.kovmarci86.android.secure.preferences.SecureFactory}.
  * @author NoTiCe
  */
 public final class SecureUtils {
