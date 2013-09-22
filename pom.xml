@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.kovmarci86.android.secure</groupId>
@@ -38,8 +39,8 @@
 		<connection>scm:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</connection>
 		<developerConnection>scm:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</developerConnection>
 		<url>git:git:kovmarci86@github.com/kovmarci86/android-secure-preferences.git</url>
-	  <tag>secure-storage-parent-1.0.0</tag>
-  </scm>
+		<tag>secure-storage-parent-1.0.0</tag>
+	</scm>
 
 	<distributionManagement>
 		<site>
@@ -54,6 +55,8 @@
 		<github.global.oauth2Token />
 		<repositoryName>android-secure-preferences</repositoryName>
 		<repositoryOwner>kovmarci86</repositoryOwner>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<reporting>
@@ -160,6 +163,7 @@
 					<configuration>
 						<source>1.6</source>
 						<target>1.6</target>
+						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 				<plugin>
