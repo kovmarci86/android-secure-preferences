@@ -10,6 +10,7 @@ import com.github.kovmarci86.android.secure.preferences.SecureSharedPreferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Build;
 import android.test.InstrumentationTestCase;
 
 /**
@@ -39,7 +40,9 @@ public class SecureFactoryFunctionalTest extends InstrumentationTestCase {
         super.tearDown();
         unencryptedPreferences = getInstrumentation().getContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         Editor edit = unencryptedPreferences.edit();
-        edit.putStringSet(STRING_SET_KEY, STRING_SET_VAULE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            edit.putStringSet(STRING_SET_KEY, STRING_SET_VAULE);
+        }
         edit.putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE);
         edit.putString(STRING_KEY, STRING_VALUE);
         edit.putFloat(FLOAT_KEY, FLOAT_VALUE);
@@ -64,7 +67,9 @@ public class SecureFactoryFunctionalTest extends InstrumentationTestCase {
         assertEquals(INT_KEY + " not found.", preferences.getInt(INT_KEY, 0), INT_VALUE);
         assertEquals(STRING_KEY + " not found.", preferences.getString(STRING_KEY, null), STRING_VALUE);
         assertEquals(LONG_KEY + " not found.", preferences.getLong(LONG_KEY, 0), LONG_VALUE);
-        Arrays.equals(STRING_SET_VAULE.toArray(), preferences.getStringSet(STRING_SET_KEY, new HashSet<String>()).toArray());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            Arrays.equals(STRING_SET_VAULE.toArray(), preferences.getStringSet(STRING_SET_KEY, new HashSet<String>()).toArray());
+        }
     }
 
     /**
