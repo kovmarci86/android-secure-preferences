@@ -1,19 +1,16 @@
 package com.github.kovmarci86.android.secure.preferences;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.test.InstrumentationTestCase;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.kovmarci86.android.secure.preferences.SecureSharedPreferences;
-import com.github.kovmarci86.android.secure.preferences.SecuredEditor;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Build;
+import android.test.InstrumentationTestCase;
 import edu.gmu.tec.scout.utilities.Encryption;
 
 /**
@@ -92,8 +89,12 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
      */
     public void testSecureSharedPreferencesFluentAPIWorks() throws Exception {
         // Put values in it
-        sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE).putLong(LONG_KEY, LONG_VALUE)
-                .putString(STRING_KEY, STRING_VALUE).putStringSet(STRING_SET_KEY, STRING_SET_VALUE).commit();
+        SecuredEditor editor = sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE)
+                .putLong(LONG_KEY, LONG_VALUE).putString(STRING_KEY, STRING_VALUE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            editor.putStringSet(STRING_SET_KEY, STRING_SET_VALUE);
+        }
+        editor.commit();
 
         // read back the values with new instance of SharedPreferences
         setUp();
@@ -103,7 +104,9 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
         assertEquals(WRONG_VALUE_MESSAGE, INT_VALUE, sut.getInt(INT_KEY, 0));
         assertEquals(WRONG_VALUE_MESSAGE, LONG_VALUE, sut.getLong(LONG_KEY, 0L));
         assertEquals(WRONG_VALUE_MESSAGE, STRING_VALUE, sut.getString(STRING_KEY, null));
-        assertEquals(WRONG_VALUE_MESSAGE, STRING_SET_VALUE, sut.getStringSet(STRING_SET_KEY, null));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            assertEquals(WRONG_VALUE_MESSAGE, STRING_SET_VALUE, sut.getStringSet(STRING_SET_KEY, null));
+        }
     }
 
     /**
@@ -111,17 +114,19 @@ public class SecureSharedPreferencesFunctionalTest extends InstrumentationTestCa
      * values.
      */
     public void testSecureSharedPreferencesApply() throws Exception {
-        // Put values in it
-        sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE).putLong(LONG_KEY, LONG_VALUE)
-                .putString(STRING_KEY, STRING_VALUE).putStringSet(STRING_SET_KEY, STRING_SET_VALUE).apply();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            // Put values in it
+            sut.edit().putBoolean(BOOLEAN_KEY, BOOLEAN_VALUE).putFloat(FLOAT_KEY, FLOAT_VALUE).putInt(INT_KEY, INT_VALUE)
+                    .putLong(LONG_KEY, LONG_VALUE).putString(STRING_KEY, STRING_VALUE).putStringSet(STRING_SET_KEY, STRING_SET_VALUE).apply();
 
-        // read back the values with new instance of SharedPreferences
-        assertEquals(WRONG_VALUE_MESSAGE, BOOLEAN_VALUE, sut.getBoolean(BOOLEAN_KEY, false));
-        assertEquals(WRONG_VALUE_MESSAGE, FLOAT_VALUE, sut.getFloat(FLOAT_KEY, 0f));
-        assertEquals(WRONG_VALUE_MESSAGE, INT_VALUE, sut.getInt(INT_KEY, 0));
-        assertEquals(WRONG_VALUE_MESSAGE, LONG_VALUE, sut.getLong(LONG_KEY, 0L));
-        assertEquals(WRONG_VALUE_MESSAGE, STRING_VALUE, sut.getString(STRING_KEY, null));
-        assertEquals(WRONG_VALUE_MESSAGE, STRING_SET_VALUE, sut.getStringSet(STRING_SET_KEY, null));
+            // read back the values with new instance of SharedPreferences
+            assertEquals(WRONG_VALUE_MESSAGE, BOOLEAN_VALUE, sut.getBoolean(BOOLEAN_KEY, false));
+            assertEquals(WRONG_VALUE_MESSAGE, FLOAT_VALUE, sut.getFloat(FLOAT_KEY, 0f));
+            assertEquals(WRONG_VALUE_MESSAGE, INT_VALUE, sut.getInt(INT_KEY, 0));
+            assertEquals(WRONG_VALUE_MESSAGE, LONG_VALUE, sut.getLong(LONG_KEY, 0L));
+            assertEquals(WRONG_VALUE_MESSAGE, STRING_VALUE, sut.getString(STRING_KEY, null));
+            assertEquals(WRONG_VALUE_MESSAGE, STRING_SET_VALUE, sut.getStringSet(STRING_SET_KEY, null));
+        }
     }
 
     /**
